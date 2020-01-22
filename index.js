@@ -36,7 +36,6 @@ const validate = (schema, name, value, args) => {
     });
   }
 
-
   // iterator check
   if (schema.iterator) {
     each(value, (v) => {
@@ -47,10 +46,10 @@ const validate = (schema, name, value, args) => {
   }
 };
 
-const delegate = (fn, schemas) => {
+const delegate = function (fn, schemas) {
   let args = [];
 
-  const func = (..._args) => {
+  const func = function (..._args) {
     [].slice.call(_args, 0).forEach((x, i) => {
       if (x != null) args[i] = x;
     });
@@ -67,7 +66,7 @@ const delegate = (fn, schemas) => {
     func[schema.name] = getArgument(index);
   });
 
-  func.exec = () => {
+  func.exec = function () {
     let result;
     try {
       each(schemas, (schema, index) => {
